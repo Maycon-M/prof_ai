@@ -9,6 +9,9 @@ pydantic = "*"
 anyio = "*"
 uvicorn = "*"
 gunicorn = "*"
+sqlalchemy = "*"
+pyodbc = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
