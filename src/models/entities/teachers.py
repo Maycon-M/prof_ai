@@ -3,6 +3,9 @@ from src.models.base import Base
 
 class TeacherTable (Base):
     
+    """Classe que define a tabela de professores no banco de dados."""
+    
+    
     __tablename__ = "teachers"
     
     id = Column(Integer, primary_key=True, autoincrement=True)
