@@ -1,33 +1,36 @@
+# Stage de build para compilar as dependências
+FROM python:3.12.11-alpine3.22 AS build
+
+WORKDIR /app
+
+RUN apk update && apk add --no-cache \
+      postgresql-dev \
+      build-base \
+      musl-dev \
+      python3-dev
+
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Stage final mais enxuto
 FROM python:3.12.11-alpine3.22
 
 WORKDIR /app
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-        curl \
-        apt-transport-https \
-        gnupg \
-        unixodbc \
-        unixodbc-dev
+# Somente runtime
+RUN apk update && apk add --no-cache \
+      postgresql-libs
 
-RUN apt-get remove -y unixodbc-common odbcinst libodbc2 libodbcinst2 || true
-
-RUN mkdir -p /etc/apt/keyrings && \
-    curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/keyrings/microsoft.asc > /dev/null && \
-    echo "deb [signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/debian/11/prod bullseye main" | tee /etc/apt/sources.list.d/mssql-release.list
-
-RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
-        msodbcsql18 \
-        --allow-downgrades --allow-remove-essential --allow-change-held-packages \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY requirements.txt /app
-RUN pip install -r requirements.txt
+COPY --from=build /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
+COPY --from=build /usr/local/bin/ /usr/local/bin/
 
 COPY . /app
 
 EXPOSE 8888
 
-CMD ["gunicorn","-k","uvicorn.workers.UvicornWorker",  "src.main.server.server:app", "--bind", "0.0.0.0:8888"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "src.main.server.server:app", "--bind", "0.0.0.0:8888"]
+
 
 # CMD ["uvicorn", "src.main.server.server:app", "--reload", "--host", "0.0.0.0", "--port", "8888"]
 
