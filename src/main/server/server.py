@@ -3,11 +3,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
 
+from src.models.settings.postegres_connection import pg_connection_handler
+
 # ROTAS
 from src.main.routes.health_checker_route import router as health_checker_router
+from src.main.routes.post_create_exam_route import router as post_create_exam_router
 
 # LOGGING
 from src.configs.logging_config import LOGGER as logger
+
+
+pg_connection_handler.connect_to_db()
 
 app = FastAPI (
     title="API - Prof AI",
@@ -46,3 +52,4 @@ async def http_exception_handler(request, exc):
     
 
 app.include_router(health_checker_router)
+app.include_router(post_create_exam_router)
