@@ -1,5 +1,6 @@
 # INTERFACES
 from src.interfaces.models.db_connection_interface import IDataBaseConnectionHandler
+from src.interfaces.models.exams_repository_interface import IExamsRepository
 
 # TABELA
 from src.models.entities.exams import ExamsTable
@@ -7,7 +8,7 @@ from src.models.entities.exams import ExamsTable
 # SCHEMAS
 from src.schemas.exam import Exam
 
-class ExamsRepository:
+class ExamsRepository (IExamsRepository):
     """Repositorio para manipular as operações relacionadas as provas.
     
     Attributes:
