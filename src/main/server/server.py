@@ -8,10 +8,10 @@ from src.models.settings.postegres_connection import pg_connection_handler
 # ROTAS
 from src.main.routes.health_checker_route import router as health_checker_router
 from src.main.routes.post_create_exam_route import router as post_create_exam_router
-from src.main.routes.post_question_route import router as post_question_router
-from src.main.routes.get_questions_route import router as get_questions_router
-from src.main.routes.post_students_route import router as post_students_router
-from src.main.routes.post_answers_route import router as post_answers_router
+from src.main.routes.post_create_question_route import router as post_question_router
+from src.main.routes.get_questions_by_exam_id_route import router as get_questions_router
+from src.main.routes.post_create_students_route import router as post_students_router
+from src.main.routes.post_create_answer_route import router as post_answers_router
 
 # LOGGING
 from src.configs.logging_config import LOGGER as logger

@@ -18,11 +18,59 @@ from src.main.composer.create_student_composer import create_student_composer
 
 router = APIRouter(
     prefix="/students",
-    tags=["students"]
+    tags=["Students"],
+    responses={
+        201: {
+            "description": "Student created successfully",
+            "content": {
+                "application/json": {
+                    "status": "success",
+                    "message": "Estudante criado com sucesso.",
+                    "attributes": {
+                        "full_name": "nome completo do aluno",
+                        "registration_number": "número de matrícula",
+                        "time_stamp": "2025-10-01T12:00:00",
+                    }
+                }
+            }
+        },
+        400: {
+            "description": "Bad Request - Invalid input data",
+            "content": {
+                "application/json": {
+                    "detail": "Dados de entrada inválidos."
+                }
+            }
+        },
+        404: {
+            "description": "Not Found - Resource not found",
+            "content": {
+                "application/json": {
+                    "detail": "Recurso não encontrado."
+                }
+            }
+        },
+        422: {
+            "description": "Unprocessable Entity - Validation error",
+            "content": {
+                "application/json": {
+                    "detail": "Erro de validação."
+                }
+            }
+        },
+        500: {
+            "description": "Internal Server Error - Unexpected error",
+            "content": {
+                "application/json": {
+                    "detail": "Erro inesperado ocorreu."
+                }
+            }
+        }
+    }
 )
 
 
-@router.post("/create")
+@router.post("/create", response_class=JSONResponse, status_code=201)
 async def post_students(request: Request, headers: dict = Depends(get_request_headers)):
     """Rota para criar um novo estudante."""
 

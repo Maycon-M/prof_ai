@@ -18,10 +18,61 @@ from src.validators.answers import AnswersValidBody
 
 router = APIRouter(
     prefix="/answers",
-    tags=["answers"]
+    tags=["Answers"],
+    responses= {
+        201: {
+            "description": "Answer created successfully",
+            "content": {
+                "application/json": {
+                    "status": "success",
+                    "message": "Respostas criadas com sucesso."
+                }
+            }
+        },
+        400: {
+            "description": "Bad Request - Invalid input data",
+            "content": {
+                "application/json": {
+                    "detail": "Invalid input data."
+                }
+            }
+        },
+        404: {
+            "description": "Not Found - Resource not found",
+            "content": {
+                "application/json": {
+                    "detail": "Resource not found."
+                }
+            }
+        },
+        422: {
+            "description": "Unprocessable Entity - Validation error",
+            "content": {
+                "application/json": {
+                    "detail": "Validation error."
+                }
+            }
+        },
+        500: {
+            "description": "Internal Server Error - Unexpected error",
+            "content": {
+                "application/json": {
+                    "detail": "Unexpected error occurred."
+                }
+            }
+        },
+        503: {
+            "description": "Service Unavailable - Service is currently unavailable",
+            "content": {
+                "application/json": {
+                    "detail": "Service is currently unavailable."
+                }
+            }
+        }
+    }
 )
 
-@router.post("/create")
+@router.post("/create", response_class=JSONResponse, status_code=201)
 async def create_answers(request: Request, 
                          headers: dict = Depends(get_request_headers)) -> JSONResponse:
     """Endpoint para criar respostas de uma prova."""

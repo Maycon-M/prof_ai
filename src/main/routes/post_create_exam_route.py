@@ -17,10 +17,67 @@ from src.main.composer.create_exam_composer import create_exam_composer
 
 router = APIRouter(
     prefix="/exams",
-    tags=["exams"]
+    tags=["Exams"],
+    responses={
+        201: {
+            "description": "Exam created successfully",
+            "content": {
+                "application/json": {
+                    "status": "success",
+                    "message": "Prova criada com sucesso.",
+                    "attributes": {
+                        "subject": "subject_name",
+                        "teacher_id": 1,
+                        "time_stamp": "2023-10-01T12:00:00",
+                        "correction_status": "Pendente"
+                    }
+                }
+            }
+        },
+        400: {
+            "description": "Bad Request - Invalid input data",
+            "content": {
+                "application/json": {
+                    "detail": "Dados de entrada inválidos."
+                }
+            }
+        },
+        404: {
+            "description": "Not Found - Resource not found",
+            "content": {
+                "application/json": {
+                    "detail": "Recurso não encontrado."
+                }
+            }
+        },
+        422: {
+            "description": "Unprocessable Entity - Validation error",
+            "content": {
+                "application/json": {
+                    "detail": "Erro de validação."
+                }
+            }
+        },
+        500: {
+            "description": "Internal Server Error - Unexpected error",
+            "content": {
+                "application/json": {
+                    "detail": "Erro inesperado ocorreu."
+                }
+            }
+        },
+        503: {
+            "description": "Service Unavailable - Service is currently unavailable",
+            "content": {
+                "application/json": {
+                    "detail": "Serviço indisponível no momento."
+                }
+            }
+        }
+    }
 )
 
-@router.post("/create")
+@router.post("/create", response_class=JSONResponse, status_code=201)
 async def create_exam_route(
     request: Request,
 ):

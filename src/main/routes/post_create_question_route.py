@@ -18,10 +18,61 @@ from src.main.composer.create_questions_composer import create_questions_compose
 
 router = APIRouter(
     prefix="/questions",
-    tags=["questions"]
+    tags=["Questions"],
+    responses={
+        201: {
+            "description": "Questions created successfully",
+            "content": {
+                "application/json": {
+                    "status": "success",
+                    "message": "Questões criadas com sucesso."
+                }
+            }
+        },
+        400: {
+            "description": "Bad Request - Invalid input data",
+            "content": {
+                "application/json": {
+                    "detail": "Dados de entrada inválidos."
+                }
+            }
+        },
+        404: {
+            "description": "Not Found - Resource not found",
+            "content": {
+                "application/json": {
+                    "detail": "Recurso não encontrado."
+                }
+            }
+        },
+        422: {
+            "description": "Unprocessable Entity - Validation error",
+            "content": {
+                "application/json": {
+                    "detail": "Erro de validação."
+                }
+            }
+        },
+        500: {
+            "description": "Internal Server Error - Unexpected error",
+            "content": {
+                "application/json": {
+                    "detail": "Erro inesperado ocorreu."
+                }
+            }
+        },
+        503: {
+            "description": "Service Unavailable - Service is currently unavailable",
+            "content": {
+                "application/json": {
+                    "detail": "Serviço indisponível."
+                }
+            }
+        }
+    }
 )
 
-@router.post("/create/{exam_id}")
+@router.post("/create/{exam_id}", response_class=JSONResponse, status_code=201)
 async def post_questions(exam_id: int, request: Request, headers: dict = Depends(get_request_headers)):
 
     """Rota para criar questões associadas a uma prova."""
