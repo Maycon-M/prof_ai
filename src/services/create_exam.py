@@ -8,6 +8,9 @@ from src.interfaces.models.exams_repository_interface import IExamsRepository
 # SCHEMAS
 from src.schemas.exam import Exam
 
+# SETRVICES
+from src.services.get_time_stamp import GetTimeStamp
+
 class CreateExam (ICreateExamService):
     
     """Classe responsável por criar uma prova.
@@ -21,11 +24,12 @@ class CreateExam (ICreateExamService):
     def __init__(self, exams_repository: IExamsRepository) -> None:
         self.__exams_repository = exams_repository
         self.__logger = LOGGER
+        self.__get_time_stamp = GetTimeStamp
 
     async def execute(self, exam_dto: dict) -> dict:
         """Cria uma nova prova no banco de dados."""
         
-        time_stamp = self.__get_time_stamp()
+        time_stamp = self.__get_time_stamp.get_current_time_stamp()
         correction_status = "Pendente"
         
         exam_data = Exam(
@@ -38,11 +42,7 @@ class CreateExam (ICreateExamService):
         self.__insert_exam(exam_data)
         
         return self.__format_response(exam_data)
-        
-    def __get_time_stamp(self) -> str:
-        """Obtém o timestamp atual."""
-        from datetime import datetime
-        return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     
     def __insert_exam(self, exam_data: Exam) -> None:
         """Insere a prova no repositório."""
