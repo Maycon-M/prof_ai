@@ -11,6 +11,7 @@ from src.main.routes.post_create_exam_route import router as post_create_exam_ro
 from src.main.routes.post_question_route import router as post_question_router
 from src.main.routes.get_questions_route import router as get_questions_router
 from src.main.routes.post_students_route import router as post_students_router
+from src.main.routes.post_answers_route import router as post_answers_router
 
 # LOGGING
 from src.configs.logging_config import LOGGER as logger
@@ -59,3 +60,4 @@ app.include_router(post_create_exam_router)
 app.include_router(post_question_router)
 app.include_router(get_questions_router)
 app.include_router(post_students_router)
+app.include_router(post_answers_router)
