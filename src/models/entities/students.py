@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, VARCHAR, TIMESTAMP
-from src.models.base import BaseModel
+from src.models.base import Base
 
-class StudentTable(BaseModel):
+class StudentTable(Base):
     """Classe que define a tabela de estudantes no banco de dados."""
     
     __tablename__ = "students"
