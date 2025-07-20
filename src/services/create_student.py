@@ -1,5 +1,5 @@
 # INTERFACES
-from src.interfaces.services.create_student_interface import ICreateStudentService
+from src.interfaces.services.create_student_interface import ICreateStudent
 from src.interfaces.models.questions_repository_interface import IQuestionsRepository
 
 # LOGGER
@@ -15,7 +15,7 @@ from src.schemas.student import Student
 from src.errors.http_bad_request import HttpBadRequest
 from src.errors.http_internal_server_error import HttpInternalServerError
 
-class CreateStudent (ICreateStudentService):
+class CreateStudent (ICreateStudent):
     
     def __init__(self, questions_repository: IQuestionsRepository):
         self.__questions_repository = questions_repository
@@ -65,10 +65,13 @@ class CreateStudent (ICreateStudentService):
         """
         
         try:
-            self.__questions_repository.insert_student(student)
+            self.__questions_repository.create_student(student)
             self.__logger.info(f"Student {student.full_name} created successfully.")
         except Exception as e:
             self.__logger.error(f"Error inserting student into repository: {e}")
+            raise HttpInternalServerError(
+                detail="Um erro ocorreu ao tentar inserir estudante no banco de dados."
+            ) from e
 
     
     def __format_response(self, student: Student) -> dict:
@@ -87,6 +90,6 @@ class CreateStudent (ICreateStudentService):
             "attributes": {
                 "full_name": student.full_name,
                 "registration_number": student.registration_number,
-                "time_stamp": student.time_stamp.isoformat(),
+                "time_stamp": student.created_at.isoformat(),
             }
         }
