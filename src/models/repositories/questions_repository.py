@@ -27,3 +27,14 @@ class QuestionsRepository(IQuestionsRepository):
             except Exception as e:
                 database.session.rollback()
                 raise e
+
+    def get_questions_by_exam_id(self, exam_id: int) -> list[QuestionsTable]:
+        """Retorna todas as questões associadas a um exame específico."""
+        with self.__db_conn_handler as database:
+            try:
+                questions = database.session.query(QuestionsTable).filter_by(exam_id=exam_id).all()
+                return [question.to_dict() for question in questions]
+
+            except Exception as e:
+                raise e
+    
