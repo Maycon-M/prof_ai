@@ -10,6 +10,7 @@ from src.main.routes.health_checker_route import router as health_checker_router
 from src.main.routes.post_create_exam_route import router as post_create_exam_router
 from src.main.routes.post_question_route import router as post_question_router
 from src.main.routes.get_questions_route import router as get_questions_router
+from src.main.routes.post_students_route import router as post_students_router
 
 # LOGGING
 from src.configs.logging_config import LOGGER as logger
@@ -57,3 +58,4 @@ app.include_router(health_checker_router)
 app.include_router(post_create_exam_router)
 app.include_router(post_question_router)
 app.include_router(get_questions_router)
+app.include_router(post_students_router)
