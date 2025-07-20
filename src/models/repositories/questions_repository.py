@@ -33,7 +33,7 @@ class QuestionsRepository(IQuestionsRepository):
         with self.__db_conn_handler as database:
             try:
                 questions = database.session.query(QuestionsTable).filter_by(exam_id=exam_id).all()
-                return [question.to_dict() for question in questions]
+                return questions
 
             except Exception as e:
                 raise e
