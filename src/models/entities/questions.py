@@ -13,6 +13,7 @@ class QuestionsTable(Base):
     exam_id = Column(Integer, ForeignKey("exams.id", ondelete="CASCADE"), nullable=False)
     created_at = Column(TIMESTAMP, nullable=False)
     correction_status = Column(VARCHAR(100), nullable=False)
+    question_number = Column(Integer, nullable=False)
     
-    def __repr__(self):
-        return f"<QuestionsTable(id={self.id}, question_text={self.question_text}, exam_id={self.exam_id}, created_at={self.created_at}, correction_status={self.correction_status})>"
+    def __repr__(self):\
+        return f"<QuestionsTable(id={self.id}, question_number= {self.question_number}, question_text={self.question_text}, exam_id={self.exam_id}, created_at={self.created_at}, correction_status={self.correction_status})>"

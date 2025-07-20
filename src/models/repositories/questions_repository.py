@@ -19,6 +19,7 @@ class QuestionsRepository(IQuestionsRepository):
                     question_text=question_data['text'],
                     created_at=question_data['created_at'],
                     correction_status=question_data['correction_status'],
+                    question_number=question_data['number']
                 )
                 database.session.add(data_object)
                 database.session.commit()
