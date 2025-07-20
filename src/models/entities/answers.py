@@ -14,7 +14,7 @@ class AnswersTable(Base):
     student_id = Column(Integer, ForeignKey("students.id", ondelete="CASCADE"), nullable=False)
     created_at = Column(TIMESTAMP, nullable=False)
     score = Column(Numeric(5,2), nullable=True)
-    correction_status = Column(VARCHAR(100), nullable=False)
+    correnction_status = Column(VARCHAR(100), nullable=False)
     
     
     def __repr__(self):

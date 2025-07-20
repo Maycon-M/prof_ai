@@ -70,8 +70,8 @@ class CreateAnswers (ICreateAnswers):
             await self.__answers_repository.insert_answer(answer_data)
         except Exception as e:
             self.__logger.error(f"Erro ao criar resposta: {e}", exc_info=True, stack_info=True)
-            raise HttpInternalServerError(f"Erro ao criar resposta: {e}", exc_info=True, stack_info=True)
-    
+            raise HttpInternalServerError(f"Erro ao criar resposta: {e}") from e
+            
     def __format_response(self) -> dict:
         """Formata a resposta de sucesso.
         
