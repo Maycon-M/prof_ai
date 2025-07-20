@@ -39,7 +39,7 @@ class CreateQuestionsService (ICreateQuestionsService):
                 "text": question['question'],
                 "number": question['number'],
                 "exam_id": exam_id,
-                "time_stamp": self.__get_time_stamp.get_current_time_stamp(),
+                "created_at": self.__get_time_stamp.get_current_time_stamp(),
                 "correction_status": "Pendente"
             }
             self.__insert_question(question_data)
