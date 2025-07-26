@@ -12,6 +12,7 @@ gunicorn = "*"
 sqlalchemy = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
+email-validator = "*"
 
 [dev-packages]
 
