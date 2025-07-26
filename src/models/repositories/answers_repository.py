@@ -48,7 +48,7 @@ class AnswersRepository (IAnswersRepository):
                     student_id=answer_data["student_id"],
                     answer_text=answer_data["answer_text"],
                     created_at=answer_data["created_at"],
-                    correnction_status=answer_data["correction_status"],
+                    correction_status=answer_data["correction_status"],
                 )
                 database.session.add(answer)
                 database.session.commit()
