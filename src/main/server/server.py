@@ -25,6 +25,7 @@ from src.main.routes.post_create_answer_route import router as post_answers_rout
 from src.main.routes.get_answer_by_id_route import router as get_answer_by_id_router
 from src.main.routes.get_answers_by_question_id_route import router as get_answers_by_question_id_router
 from src.main.routes.get_answers_by_student_id_route import router as get_answers_by_student_id_router
+from src.main.routes.patch_define_answers_score_route import router as patch_define_answers_score_router
 
 # LOGGING
 from src.configs.logging_config import LOGGER as logger
@@ -81,3 +82,4 @@ app.include_router(post_answers_router)
 app.include_router(get_answer_by_id_router)
 app.include_router(get_answers_by_question_id_router)
 app.include_router(get_answers_by_student_id_router)
+app.include_router(patch_define_answers_score_router)
