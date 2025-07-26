@@ -6,12 +6,23 @@ from fastapi.exceptions import HTTPException
 from src.models.settings.postegres_connection import pg_connection_handler
 
 # ROTAS
+
+# health checker
 from src.main.routes.health_checker_route import router as health_checker_router
+
+# students
+from src.main.routes.post_create_students_route import router as post_students_router
+
+# exams
 from src.main.routes.post_create_exam_route import router as post_create_exam_router
+
+# questions
 from src.main.routes.post_create_question_route import router as post_question_router
 from src.main.routes.get_questions_by_exam_id_route import router as get_questions_router
-from src.main.routes.post_create_students_route import router as post_students_router
+
+# answers
 from src.main.routes.post_create_answer_route import router as post_answers_router
+from src.main.routes.get_answer_by_id_route import router as get_answer_by_id_router
 
 # LOGGING
 from src.configs.logging_config import LOGGER as logger
@@ -56,8 +67,13 @@ async def http_exception_handler(request, exc):
     
 
 app.include_router(health_checker_router)
+
+app.include_router(post_students_router)
+
 app.include_router(post_create_exam_router)
+
 app.include_router(post_question_router)
 app.include_router(get_questions_router)
-app.include_router(post_students_router)
+
 app.include_router(post_answers_router)
+app.include_router(get_answer_by_id_router)
