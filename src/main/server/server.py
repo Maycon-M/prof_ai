@@ -10,6 +10,9 @@ from src.models.settings.postegres_connection import pg_connection_handler
 # health checker
 from src.main.routes.health_checker_route import router as health_checker_router
 
+# teachers
+from src.main.routes.post_create_teacher_route import router as post_teacher_router
+
 # students
 from src.main.routes.post_create_students_route import router as post_students_router
 
@@ -70,6 +73,8 @@ async def http_exception_handler(request, exc):
     
 
 app.include_router(health_checker_router)
+
+app.include_router(post_teacher_router)
 
 app.include_router(post_students_router)
 
