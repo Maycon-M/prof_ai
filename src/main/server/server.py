@@ -23,6 +23,7 @@ from src.main.routes.get_questions_by_exam_id_route import router as get_questio
 # answers
 from src.main.routes.post_create_answer_route import router as post_answers_router
 from src.main.routes.get_answer_by_id_route import router as get_answer_by_id_router
+from src.main.routes.get_answers_by_question_id_route import router as get_answers_by_question_id_router
 
 # LOGGING
 from src.configs.logging_config import LOGGER as logger
@@ -77,3 +78,4 @@ app.include_router(get_questions_router)
 
 app.include_router(post_answers_router)
 app.include_router(get_answer_by_id_router)
+app.include_router(get_answers_by_question_id_router)
