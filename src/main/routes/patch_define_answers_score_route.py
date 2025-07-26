@@ -55,7 +55,7 @@ router = APIRouter(
 )
 
 @router.patch("/score/", response_model=None)
-async def patch_define_answers_score_route(
+async def patch_define_answers_score(
     answer_id: int = Query(..., description="ID of the answer whose score will be defined"),
     score: float = Query(ge = 0, le = 10, description="Score to be assigned to the answer"),
     headers: dict = Depends(get_request_headers)

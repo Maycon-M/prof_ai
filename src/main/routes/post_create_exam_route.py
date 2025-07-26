@@ -78,9 +78,13 @@ router = APIRouter(
 )
 
 @router.post("/create", response_class=JSONResponse, status_code=201)
-async def create_exam_route(
+async def create_exam(
     request: Request,
 ):
+    """Endpoint para criar uma nova prova.
+    Esta rota recebe os dados da prova e os processa para criação.    
+    """
+    
     try:
         body = await request.json()
         valid_body = ExamValidBody(**body)
