@@ -30,6 +30,7 @@ class StudentsRepository (IStudentsRepository):
                 database.session.rollback()
                 raise e
 
+    # TODO: Implementar serviços de busca por nome e número de matrícula
     def get_student_by_registration_number(self, registration_number: str) -> StudentTable | None:
         """Retorna um estudante pelo número de matrícula."""
         with self.__db_conn_handler as database:
@@ -39,7 +40,8 @@ class StudentsRepository (IStudentsRepository):
 
             except Exception as e:
                 raise e
-            
+    
+    # TODO: Implementar serviço de busca por nome
     def get_all_students(self) -> list[StudentTable]:
         """Retorna todos os estudantes cadastrados."""
         with self.__db_conn_handler as database:
@@ -50,6 +52,7 @@ class StudentsRepository (IStudentsRepository):
             except Exception as e:
                 raise e
     
+    # TODO: Implementar serviço de busca por ID
     def get_student_by_id(self, student_id: int) -> StudentTable | None:
         """Retorna um estudante pelo ID."""
         with self.__db_conn_handler as database:
@@ -59,3 +62,4 @@ class StudentsRepository (IStudentsRepository):
 
             except Exception as e:
                 raise e
+    
