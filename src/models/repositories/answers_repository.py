@@ -115,3 +115,27 @@ class AnswersRepository (IAnswersRepository):
                 return answers
             except Exception as e:
                 raise e
+
+    async def update_score (self, answer_id: int, score: float, status: str) -> None:
+        """Atualiza a pontuação de uma resposta.
+        
+        Args:
+            answer_id (int): ID da resposta a ser atualizada.
+            score (float): Nova pontuação a ser atribuída à resposta.
+        
+        Raises:
+            Exception: Se ocorrer um erro ao atualizar a pontuação no banco de dados.
+        """
+        
+        with self._db_connection as database:
+            try:
+                answer = database.session.query(AnswersTable).filter_by(id=answer_id).first()
+                if answer:
+                    answer.score = score
+                    answer.correction_status = status
+                    database.session.commit()
+                else:
+                    raise ValueError(f"Answer with ID {answer_id} not found.")
+            except Exception as e:
+                database.session.rollback()
+                raise e

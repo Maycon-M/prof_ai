@@ -60,3 +60,14 @@ class IAnswersRepository (ABC):
             list[AnswersTable]: Lista de objetos AnswersTable representando as respostas associadas ao estudante.
         """
         pass
+
+    @abstractmethod
+    async def update_score (self, answer_id: int, score: float, status: str) -> None:
+        """Atualiza a pontuação de uma resposta.
+        
+        Args:
+            answer_id (int): ID da resposta cuja pontuação será atualizada.
+            score (float): Nova pontuação a ser atribuída à resposta.
+            status (str): Novo status de correção da resposta.
+        """
+        pass
