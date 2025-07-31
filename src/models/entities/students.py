@@ -12,4 +12,4 @@ class StudentTable(Base):
     created_at = Column(TIMESTAMP, nullable=False)
     
     def __repr__(self):
-        return f"<StudentTable(id={self.id}, name={self.name}, registration_number={self.registration_number}, created_at={self.created_at})>"
+        return f"<StudentTable(id={self.id}, name={self.full_name}, registration_number={self.registration_number}, created_at={self.created_at})>"
