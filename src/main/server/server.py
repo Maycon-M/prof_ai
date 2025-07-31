@@ -50,7 +50,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.middleware(middleware_type="https")
+@app.middleware(middleware_type="http")
 async def log_requests(request: Request, call_next):
     if request.method != "GET":
         logger.info(f"Recebendo requisição: {request.method} {request.url.path}")
