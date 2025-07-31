@@ -18,4 +18,4 @@ class AnswersTable(Base):
     
     
     def __repr__(self):
-        return f"<AnswersTable(id={self.id}, answer_text={self.answer_text}, question_id={self.question_id}, created_at={self.created_at}, is_correct={self.is_correct})>"
+        return f"<AnswersTable(id={self.id}, answer_text={self.answer_text}, question_id={self.question_id}, created_at={self.created_at}, correction_status={self.correction_status})>"
